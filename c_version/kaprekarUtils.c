@@ -25,22 +25,22 @@
 int isKaprekar(int n) {
 
   if(n < 1) {
-    return false;
+    return 0;//cannot read false, 0 stands for false
   }
 
   int i;
   //compute the square
   long square = n * (long) n;
   //compute the number of digits of the square
-  int numDigits = (int) log10(n) + 1;
-  long modulus = 0;
+  int numDigits = (int) log10(square) + 1;//must take log of the square, not n
+  long modulus = 1;//modulus cannot equal 0 because it is later a divisor
   long first, second;
 
   //for each possible "split" of the square...
-  for(i=1; i<=numberOfDigits; i++) {
+  for(i=1; i <= numDigits; i++) {//variable is declared numDigits not numberofDigits
     //increase the modulus by a factor of 10
-    modulous *= 10;
-
+     modulus *= 10;//variable spelled incorrectly
+  
     //split the square into two parts
     first = square / modulus;
     second = square % modulus;
@@ -48,7 +48,7 @@ int isKaprekar(int n) {
     //test if the split makes a Kaprekar number
     //the second part cannot be zero and if
     //the sum of the two parts is equal to n, then it is
-    if(second > 0 && n = first + second) {
+    if(second > 0 && n == first + second) {//must use two equal symbols
       return 1;
     }
   }
